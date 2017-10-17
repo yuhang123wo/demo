@@ -23,7 +23,8 @@ public class UserController {
 
 	@RequestMapping("testUU")
 	@ResponseBody
-	private void testUU() {
+	@LoggerManage(description="文章收集")
+	public void testUU() {
 		User user = new User();
 		user.setUserName("dsfsdf");
 		user.setTest("test");
