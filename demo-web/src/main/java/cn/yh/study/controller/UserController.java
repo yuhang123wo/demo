@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.yh.study.base.domain.User;
 import cn.yh.study.base.service.UserService;
+
 /**
  * 
  * @author yh
- * @Date   2017年10月13日
+ * @Date 2017年10月13日
  * @desc
  */
 @Controller
@@ -23,12 +24,11 @@ public class UserController {
 
 	@RequestMapping("testUU")
 	@ResponseBody
-//	@LoggerManage(description="文章收集")
 	public String testUU() {
 		User user = new User();
 		user.setUserName("dsfsdf");
 		user.setTest("test");
-//		userService.saveOne(user);
+		// userService.saveOne(user);
 		System.out.println(userService.findOne());
 		return "dfdsfdfs";
 	}
