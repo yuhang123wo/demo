@@ -10,8 +10,8 @@
 	<packaging>war</packaging>
 	<dependencies>
 		<dependency>
-			<groupId>com.xm.hang.yu.study</groupId>
-			<artifactId>study-base</artifactId>
+			<groupId>cn.yh.springboot</groupId>
+			<artifactId>demo-base</artifactId>
 			<version>${project.study.verison}</version>
 		</dependency>
 		<dependency>
