@@ -1,5 +1,7 @@
 package cn.yh.study.base.service.impl;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -24,6 +26,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findOne() {
 		return userMapper.findOne();
+	}
+
+	@Override
+	public Map getMap() {
+		return userMapper.getMap();
 	}
 
 }

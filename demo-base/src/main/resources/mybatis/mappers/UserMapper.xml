@@ -3,10 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="cn.yh.study.base.mapper.UserMapper">
-	
-	
+
+
 	<select id="findOne" resultType="cn.yh.study.base.domain.User">
-		select id,user_name userName from user where id=1
+		select * from user where id=1
 	</select>
-	
+
+	<select id="getMap" resultType="java.util.Map">
+		select * from user where id=1
+	</select>
 </mapper>

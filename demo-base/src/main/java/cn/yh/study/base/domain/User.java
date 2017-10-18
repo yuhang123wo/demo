@@ -9,6 +9,9 @@ public class User extends Entity {
 
 	private Long id;
 	private String userName;
+	private String backgroundPicture;
+	private String createTime;
+	private String email;
 
 	@Transient
 	private String test;
@@ -63,4 +66,48 @@ public class User extends Entity {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
+	/**
+	 * @return the backgroundPicture
+	 */
+	public String getBackgroundPicture() {
+		return backgroundPicture;
+	}
+
+	/**
+	 * @param backgroundPicture the backgroundPicture to set
+	 */
+	public void setBackgroundPicture(String backgroundPicture) {
+		this.backgroundPicture = backgroundPicture;
+	}
+
+	/**
+	 * @return the createTime
+	 */
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	/**
+	 * @param createTime the createTime to set
+	 */
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
+	
 }

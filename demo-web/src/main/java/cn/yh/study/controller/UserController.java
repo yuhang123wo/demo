@@ -23,13 +23,12 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping("testUU")
-	@ResponseBody
 	public String testUU() {
 		User user = new User();
 		user.setUserName("dsfsdf");
 		user.setTest("test");
 		// userService.saveOne(user);
-		System.out.println(userService.findOne());
+		System.out.println(userService.getMap());
 		return "dfdsfdfs";
 	}
 }
