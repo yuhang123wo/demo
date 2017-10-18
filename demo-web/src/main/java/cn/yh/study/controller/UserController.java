@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.yh.study.base.domain.User;
@@ -16,7 +17,8 @@ import cn.yh.study.base.service.UserService;
  * @desc
  */
 @Controller
-@RequestMapping("user")
+@RequestMapping(value = "user", method = { RequestMethod.POST,
+		RequestMethod.GET })
 public class UserController {
 
 	@Resource
@@ -29,7 +31,7 @@ public class UserController {
 		user.setTest("test");
 		// userService.saveOne(user);
 		System.out.println(userService.findOne());
-		int n=1/0;
+		int n = 1 / 0;
 		return "dfdsfdfs";
 	}
 }
