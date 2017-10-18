@@ -18,9 +18,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(Exception e, HttpServletRequest request) throws Exception {
-        logger.info("请求地址：" + request.getRequestURL());
         ModelAndView mav = new ModelAndView();
-        logger.error("异常信息：",e);
         mav.setViewName(DEFAULT_ERROR_VIEW);
         return mav;
     }

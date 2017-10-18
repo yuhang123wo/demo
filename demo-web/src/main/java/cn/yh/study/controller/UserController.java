@@ -28,7 +28,8 @@ public class UserController {
 		user.setUserName("dsfsdf");
 		user.setTest("test");
 		// userService.saveOne(user);
-		System.out.println(userService.getMap());
+		System.out.println(userService.findOne());
+		int n=1/0;
 		return "dfdsfdfs";
 	}
 }
