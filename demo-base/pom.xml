@@ -14,8 +14,8 @@
 			<version>1.1.1</version>
 		</dependency>
 		<dependency>
-			<groupId>com.xm.hang.yu.study</groupId>
-			<artifactId>study-common</artifactId>
+			<groupId>cn.yh.springboot</groupId>
+			<artifactId>demo-common</artifactId>
 			<version>${project.study.verison}</version>
 		</dependency>
 		<dependency>

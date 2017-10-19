@@ -10,6 +10,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import cn.yh.study.base.domain.User;
+import cn.yh.study.common.util.MD5;
 
 public class ShiroRealm extends AuthorizingRealm {
 	@Override
@@ -24,8 +25,10 @@ public class ShiroRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authcToken) throws AuthenticationException {
 		try {
+			UsernamePasswordCaptchaToken token = (UsernamePasswordCaptchaToken) authcToken;
+			System.out.println(111);
 			AuthenticationInfo info = new SimpleAuthenticationInfo(new User(),
-					"123456", getName());
+					MD5.md5Encode("1232"), "yh");
 			return info;
 		} catch (Exception e) {
 			e.printStackTrace();

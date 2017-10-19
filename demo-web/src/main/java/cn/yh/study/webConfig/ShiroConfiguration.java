@@ -1,8 +1,12 @@
 package cn.yh.study.webConfig;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.servlet.Filter;
 
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -12,10 +16,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import cn.yh.study.shiro.CredentialsMatcher;
+import cn.yh.study.shiro.CustomCredentialsMatcher;
+import cn.yh.study.shiro.FormAuthenticationCaptchaFilter;
 import cn.yh.study.shiro.ShiroRealm;
-
-import org.apache.shiro.mgt.SecurityManager;
 
 /**
  * 
@@ -41,14 +44,19 @@ public class ShiroConfiguration {
 	public ShiroFilterFactoryBean shiroFilter(
 			@Qualifier("securityManager") SecurityManager manager) {
 		ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
-		bean.setSecurityManager(manager);
 		// 配置登录的url和登录成功的url
 		bean.setLoginUrl("/login");
 		bean.setSuccessUrl("/home");
+		Map<String, Filter> filters = bean.getFilters();
+		filters.put("loginAuth", new FormAuthenticationCaptchaFilter());
+		bean.setFilters(filters);
+		bean.setSecurityManager(manager);
+
 		// 配置访问权限
 		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+		filterChainDefinitionMap.put("/login", "loginAuth");// 表示需要认证才可以访问
 		filterChainDefinitionMap.put("/user/**", "authc");// 表示需要认证才可以访问
-		filterChainDefinitionMap.put("/**", "authc");// 表示需要认证才可以访问
+		filterChainDefinitionMap.put("/**", "anon");// 表示需要认证才可以访问
 		bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return bean;
 	}
@@ -64,11 +72,10 @@ public class ShiroConfiguration {
 
 	// 配置自定义的权限登录器
 	@Bean(name = "shiroRealm")
-	public ShiroRealm authRealm(EhCacheManager cacheManager,
-			CredentialsMatcher credentialsMatcher) {
+	public ShiroRealm authRealm(EhCacheManager cacheManager) {
 		ShiroRealm authRealm = new ShiroRealm();
 		authRealm.setCacheManager(cacheManager);
-		authRealm.setCredentialsMatcher(credentialsMatcher);
+		authRealm.setCredentialsMatcher(new CustomCredentialsMatcher());
 		return authRealm;
 	}
 
@@ -90,11 +97,5 @@ public class ShiroConfiguration {
 		AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
 		advisor.setSecurityManager(manager);
 		return advisor;
-	}
-
-	// 配置自定义的密码比较器
-	@Bean(name = "credentialsMatcher")
-	public CredentialsMatcher credentialsMatcher() {
-		return new CredentialsMatcher();
 	}
 }
