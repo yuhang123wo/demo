@@ -1,10 +1,9 @@
-package cn.yh.study.webConfig;
+package cn.yh.study.web.config;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.Filter;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -15,6 +14,7 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,8 +33,14 @@ import cn.yh.study.shiro.ShiroRealm;
  */
 @Configuration
 public class ShiroConfiguration {
-	@Resource
+
+	@Autowired
 	private UserinfoService userinfoService;
+
+	@Bean
+	public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+		return new LifecycleBeanPostProcessor();
+	}
 
 	/**
 	 * cache
@@ -49,8 +55,7 @@ public class ShiroConfiguration {
 	}
 
 	@Bean(name = "shiroFilter")
-	public ShiroFilterFactoryBean shiroFilter(
-			@Qualifier("securityManager") SecurityManager manager) {
+	public ShiroFilterFactoryBean shiroFilter(SecurityManager manager) {
 		ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
 		// 配置登录的url和登录成功的url
 		bean.setLoginUrl("/login");
@@ -70,7 +75,8 @@ public class ShiroConfiguration {
 						"perms[" + auth.getAuthUrl() + "]");
 			}
 		}
-		filterChainDefinitionMap.put("/**", "auth");// 表示需要认证才可以访问
+		System.out.println("abc");
+		filterChainDefinitionMap.put("/**", "authc");// 表示需要认证才可以访问
 		bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return bean;
 	}
@@ -91,11 +97,6 @@ public class ShiroConfiguration {
 		authRealm.setCacheManager(cacheManager);
 		authRealm.setCredentialsMatcher(new CustomCredentialsMatcher());
 		return authRealm;
-	}
-
-	@Bean
-	public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-		return new LifecycleBeanPostProcessor();
 	}
 
 	@Bean

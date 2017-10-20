@@ -18,7 +18,7 @@ import com.github.abel533.entity.Example;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-@Service
+@Service("userinfoService")
 public class UserinfoServiceImpl implements UserinfoService {
 
 	@Resource
@@ -27,6 +27,13 @@ public class UserinfoServiceImpl implements UserinfoService {
 	private RoleMapper roleMapper;
 	@Resource
 	private AuthMapper authMapper;
+
+	
+	
+	public UserinfoServiceImpl() {
+		super();
+		System.out.println("=======================xxxxx");
+	}
 
 	@Override
 	public PageInfo<Userinfo> queryUserinfo(int pageNo, int pageSize) {

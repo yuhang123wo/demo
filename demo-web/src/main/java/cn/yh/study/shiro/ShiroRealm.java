@@ -1,5 +1,7 @@
 package cn.yh.study.shiro;
 
+import javax.annotation.Resource;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -10,9 +12,14 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import cn.yh.study.base.domain.Userinfo;
+import cn.yh.study.base.service.UserinfoService;
 import cn.yh.study.common.util.MD5;
 
 public class ShiroRealm extends AuthorizingRealm {
+/*
+	@Resource
+	private UserinfoService userinfoService;*/
+
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
