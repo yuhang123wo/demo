@@ -1,10 +1,13 @@
 package cn.yh.study.webConfig;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -16,6 +19,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import cn.yh.study.base.domain.Auth;
+import cn.yh.study.base.service.UserinfoService;
 import cn.yh.study.shiro.CustomCredentialsMatcher;
 import cn.yh.study.shiro.FormAuthenticationCaptchaFilter;
 import cn.yh.study.shiro.ShiroRealm;
@@ -28,6 +33,9 @@ import cn.yh.study.shiro.ShiroRealm;
  */
 @Configuration
 public class ShiroConfiguration {
+	@Resource
+	private UserinfoService userinfoService;
+
 	/**
 	 * cache
 	 * 
@@ -55,7 +63,14 @@ public class ShiroConfiguration {
 		// 配置访问权限
 		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 		filterChainDefinitionMap.put("/login", "loginAuth");// 表示需要认证才可以访问
-		filterChainDefinitionMap.put("/**", "anon");// 表示需要认证才可以访问
+		List<Auth> list = userinfoService.findAuthAll();
+		if (CollectionUtils.isNotEmpty(list)) {
+			for (Auth auth : list) {
+				filterChainDefinitionMap.put(auth.getAuthUrl(),
+						"perms[" + auth.getAuthUrl() + "]");
+			}
+		}
+		filterChainDefinitionMap.put("/**", "auth");// 表示需要认证才可以访问
 		bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return bean;
 	}
