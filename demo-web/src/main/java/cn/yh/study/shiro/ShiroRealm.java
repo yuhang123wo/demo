@@ -9,7 +9,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import cn.yh.study.base.domain.User;
+import cn.yh.study.base.domain.Userinfo;
 import cn.yh.study.common.util.MD5;
 
 public class ShiroRealm extends AuthorizingRealm {
@@ -27,8 +27,8 @@ public class ShiroRealm extends AuthorizingRealm {
 		try {
 			UsernamePasswordCaptchaToken token = (UsernamePasswordCaptchaToken) authcToken;
 			System.out.println(111);
-			AuthenticationInfo info = new SimpleAuthenticationInfo(new User(),
-					MD5.md5Encode("1232"), "yh");
+			AuthenticationInfo info = new SimpleAuthenticationInfo(
+					new Userinfo(), MD5.md5Encode("1232"), "yh");
 			return info;
 		} catch (Exception e) {
 			e.printStackTrace();
