@@ -48,8 +48,7 @@ public class LoggerControllerAdvice {
 
 	@AfterReturning(returning = "rvt", pointcut = "within(cn.yh.study.controller..*)")
 	public void addAfterReturningLogger(JoinPoint joinPoint, Object rvt) {
-		logger.info("执行 " + joinPoint.getSignature().getName() + "返回结果："
-				+ rvt.toString());
+		logger.info("执行 " + joinPoint.getSignature().getName() + "返回结果：" + rvt);
 	}
 
 	@AfterThrowing(pointcut = "within(cn.yh.study.controller..*)", throwing = "ex")

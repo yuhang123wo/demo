@@ -3,4 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="cn.yh.study.base.mapper.UserinfoMapper">
+
+	<select id="findRoleAll" resultType="cn.yh.study.base.domain.Role">
+		select * from role
+	</select>
+
+	<select id="findAuthAll" resultType="cn.yh.study.base.domain.Auth">
+		select * from auth
+	</select>
 </mapper>

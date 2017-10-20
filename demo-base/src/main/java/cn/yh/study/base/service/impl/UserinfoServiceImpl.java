@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import cn.yh.study.base.domain.Auth;
+import cn.yh.study.base.domain.Role;
 import cn.yh.study.base.domain.Userinfo;
 import cn.yh.study.base.mapper.UserinfoMapper;
 import cn.yh.study.base.service.UserinfoService;
@@ -27,5 +29,15 @@ public class UserinfoServiceImpl implements UserinfoService {
 		example.createCriteria().andEqualTo("sex", 1);
 		List<Userinfo> list = userinfoMapper.selectByExample(example);
 		return new PageInfo<Userinfo>(list);
+	}
+
+	@Override
+	public List<Role> findRoleAll() {
+		return userinfoMapper.findRoleAll();
+	}
+
+	@Override
+	public List<Auth> findAuthAll() {
+		return userinfoMapper.findAuthAll();
 	}
 }

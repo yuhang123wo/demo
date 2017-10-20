@@ -24,7 +24,8 @@ public class UserController {
 
 	@RequestMapping("testUU")
 	public String testUU() {
-		userinfoService.queryUserinfo(1, 1);
+//		userinfoService.queryUserinfo(1, 1);
+		System.out.println(userinfoService.findRoleAll());
 		return "dfdsfdfs";
 	}
 }
