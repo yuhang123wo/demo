@@ -1,8 +1,12 @@
 package cn.yh.study.controller;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import cn.yh.study.base.service.UserinfoService;
 
 /**
  * 
@@ -15,8 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 		RequestMethod.GET })
 public class UserController {
 
+	@Resource
+	private UserinfoService userinfoService;
+
 	@RequestMapping("testUU")
 	public String testUU() {
+		userinfoService.queryUserinfo(1, 1);
 		return "dfdsfdfs";
 	}
 }
