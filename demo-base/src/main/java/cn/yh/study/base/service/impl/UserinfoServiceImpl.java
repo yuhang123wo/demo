@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import cn.yh.study.base.domain.Auth;
 import cn.yh.study.base.domain.Role;
 import cn.yh.study.base.domain.Userinfo;
+import cn.yh.study.base.mapper.AuthMapper;
+import cn.yh.study.base.mapper.RoleMapper;
 import cn.yh.study.base.mapper.UserinfoMapper;
 import cn.yh.study.base.service.UserinfoService;
 
@@ -21,6 +23,10 @@ public class UserinfoServiceImpl implements UserinfoService {
 
 	@Resource
 	private UserinfoMapper userinfoMapper;
+	@Resource
+	private RoleMapper roleMapper;
+	@Resource
+	private AuthMapper authMapper;
 
 	@Override
 	public PageInfo<Userinfo> queryUserinfo(int pageNo, int pageSize) {
@@ -33,11 +39,11 @@ public class UserinfoServiceImpl implements UserinfoService {
 
 	@Override
 	public List<Role> findRoleAll() {
-		return userinfoMapper.findRoleAll();
+		return roleMapper.select(null);
 	}
 
 	@Override
 	public List<Auth> findAuthAll() {
-		return userinfoMapper.findAuthAll();
+		return authMapper.select(null);
 	}
 }
