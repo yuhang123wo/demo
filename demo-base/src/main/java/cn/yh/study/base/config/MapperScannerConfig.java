@@ -13,6 +13,7 @@ public class MapperScannerConfig {
 	// mapper接口的扫描器
 	@Bean
 	public MapperScannerConfigurer mapperScannerConfigurer() {
+		System.out.println(22);
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 		mapperScannerConfigurer.setBasePackage("cn.yh.study.base.mapper");
 		return mapperScannerConfigurer;

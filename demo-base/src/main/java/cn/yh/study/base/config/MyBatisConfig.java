@@ -15,16 +15,16 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 @Configuration
-@AutoConfigureAfter(JdbcConfig.class)
 public class MyBatisConfig {
 
 	@Autowired
 	private DataSource dataSource;
 
 	@Bean
-	@ConditionalOnMissingBean
+//	@ConditionalOnMissingBean
 	// 当容器里没有指定的Bean的情况下创建该对象
 	public SqlSessionFactoryBean sqlSessionFactoryBean() throws IOException {
+		System.out.println(11);
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		// 设置数据源
 		sqlSessionFactoryBean.setDataSource(dataSource);
